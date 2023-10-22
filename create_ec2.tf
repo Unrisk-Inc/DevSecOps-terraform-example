@@ -63,3 +63,14 @@ resource "aws_instance" "example_instance" {
     IAMUser = var.iam_user
   }
 }
+
+output "instance_metadata" {
+  value = {
+    instance_id = aws_instance.example_instance.id
+    private_ip  = aws_instance.example_instance.private_ip
+  }
+  description = "Metadata of the created EC2 instance."
+}
+
+# Example SSH Command: 
+# ssh -i ./ssh_keys/deployer-key ec2-user@<private_ip>
